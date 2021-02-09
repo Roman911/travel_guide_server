@@ -11,7 +11,6 @@ const PostSchema = new mongoose.Schema({
   tickets: Array,
   small_text: String,
   coordinates: Array,
-  location: String,
   work_time: String,
   isType: String,
   photo: String,
@@ -27,6 +26,10 @@ const PostSchema = new mongoose.Schema({
   confirm_hash: String,
   author: {
     ref: 'User',
+    type: mongoose.Schema.Types.ObjectId
+  },
+  location: {
+    ref: 'Locations',
     type: mongoose.Schema.Types.ObjectId
   },
   last_seen: {

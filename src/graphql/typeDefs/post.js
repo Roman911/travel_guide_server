@@ -11,7 +11,6 @@ module.exports = gql`
     tickets: [String]
     small_text: String
     coordinates: [String]
-    location: String
     work_time: String
     isType: String
     editor: String
@@ -23,9 +22,11 @@ module.exports = gql`
     isPrice: String
     how_to_get_there: String
     author: User
+    location: Locations
   }
   
   extend type Query {
     allPosts: [Post!]!
+    post(_id: ID!): Post!
   }
 `

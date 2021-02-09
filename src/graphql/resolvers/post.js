@@ -8,6 +8,13 @@ module.exports = {
       } catch (err) {
         throw err
       }
+    },
+    post: async (_, { _id }) => {
+      try {
+        return await Post.findById(_id).populate('author').populate('location')
+      } catch (err) {
+        throw err
+      }
     }
   }
 }
