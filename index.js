@@ -1,11 +1,9 @@
 const { ApolloServer } = require('apollo-server')
 const mongoose = require('mongoose')
-const dotenv = require('dotenv')
+const { MONGO_DB_KEY } = require('./src/config')
 
 const typeDefs = require('./src/graphql/typeDefs')
 const resolvers = require('./src/graphql/resolvers')
-
-dotenv.config()
 
 const server = new ApolloServer({
   typeDefs,
@@ -14,7 +12,7 @@ const server = new ApolloServer({
 
 async function star() {
   try {
-    await mongoose.connect(`mongodb+srv://Roman:${process.env.MONGO_DB_KEY}@cluster0-vogsm.mongodb.net/travel?retryWrites=true&w=majority`, {
+    await mongoose.connect(`mongodb+srv://Roman:${MONGO_DB_KEY}@cluster0-vogsm.mongodb.net/travel?retryWrites=true&w=majority`, {
       useNewUrlParser: true,
       useFindAndModify: false,
       useUnifiedTopology: true,
@@ -22,8 +20,8 @@ async function star() {
     })
 
     server.listen().then(({ url }) => {
-      console.log(`🚀 Server ready at ${url}`);
-    });
+      console.log(`🚀 Server ready at ${url}`)
+    })
   } catch (e) {
     console.log('Server error', e.message)
     process.exit(1)

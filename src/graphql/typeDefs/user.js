@@ -2,7 +2,8 @@ const { gql } = require('apollo-server')
 
 module.exports = gql`
   extend type Query {
-    author(_id: ID!): User,
+    authUser: User! @isAuth
+    author(_id: ID!): User
     loginUser(email: String!, password: String!): AuthUser!
   }
 

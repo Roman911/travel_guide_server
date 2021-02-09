@@ -1,6 +1,7 @@
 const { compare, hash } = require('bcryptjs')
-const { sign } = require('jsonwebtoken')
 const { User } = require('../../models')
+const { UserAuthenticationRules, UserRegisterationRules } = require('../../validations')
+const { serializeUser, issueAuthToken } = require('../../helpers/Userfunctions')
 
 module.exports = {
   Query: {
@@ -12,7 +13,9 @@ module.exports = {
       }
     },
     loginUser: async (_, { email, password }) => {
-      const user = await User.findOne({ email: email })
+      await UserAuthenticationRules.validate({ email, password }, { abortEarly: false })
+
+      let user = await User.findOne({ email: email })
       if (!user) {
         throw new Error('Неправильний логін або пароль!')
       }
@@ -23,11 +26,8 @@ module.exports = {
         throw new Error('Неправильний логін або пароль!')
       }
 
-      const token = sign(
-        { userId: user.id, email: user.email },
-        'somesupersecretkey',
-        { expiresIn: '1h' }
-      )
+      user = await serializeUser(user)
+      let token = await issueAuthToken(user)
 
       return {
         user,
@@ -38,23 +38,32 @@ module.exports = {
   Mutation: {
     registerUser: async (_, { newUser }) => {
       try {
-        const { name, email, password } = newUser
+        const { email } = newUser
 
-        const existingUser = await User.findOne({ email })
-        if (existingUser) {
-          return new Error('Даний емейл зайнятий');
+        await UserRegisterationRules.validate(newUser, { abortEarly: false })
+
+        let user = await User.findOne({ email })
+
+        if (user) {
+          return new Error('Даний емейл зайнятий')
         }
 
-        const hashedPassword = await hash(password, 12)
-
-        const user = new User({
-          name,
-          email,
-          password: hashedPassword,
+        user = new User({
+          ...newUser,
           avatar: 'undefined'
         })
+        user.password = await hash(user.password, 10)
 
-        console.log(existingUser, hashedPassword)
+        let result = await user.save()
+        result = await serializeUser(result)
+        let token = await issueAuthToken(result)
+
+        console.log(result)
+
+        return {
+          token,
+          user: result
+        }
 
       } catch (err) {
         throw err
