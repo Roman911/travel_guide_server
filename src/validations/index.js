@@ -1,8 +1,10 @@
-const { UserAuthenticationRules, UserRegisterationRules } = require('./user')
+const NewCommentRules = require('./comment')
 const NewPostRules = require('./post')
+const { UserAuthenticationRules, UserRegisterationRules } = require('./user')
 
 module.exports = {
+  NewCommentRules,
+  NewPostRules,
   UserAuthenticationRules,
-  UserRegisterationRules,
-  NewPostRules
+  UserRegisterationRules
 }
