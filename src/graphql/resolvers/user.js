@@ -1,7 +1,7 @@
 const { compare, hash } = require('bcryptjs')
 const { User } = require('../../models')
 const { UserAuthenticationRules, UserRegisterationRules } = require('../../validations')
-const { serializeUser, issueAuthToken } = require('../../helpers/Userfunctions')
+const { serializeUser, issueAuthToken } = require('../../helpers')
 
 module.exports = {
   Query: {
@@ -57,8 +57,6 @@ module.exports = {
         let result = await user.save()
         result = await serializeUser(result)
         let token = await issueAuthToken(result)
-
-        console.log(result)
 
         return {
           token,

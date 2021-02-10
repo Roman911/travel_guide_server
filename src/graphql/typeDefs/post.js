@@ -1,6 +1,15 @@
 const { gql } = require('apollo-server')
 
 module.exports = gql`
+  extend type Query {
+    allPosts: [Post!]!
+    post(_id: ID!): Post!
+  }
+  
+  extend type Mutation {
+    changeLike(postId: ID!, userId: ID!): Post!
+  }
+  
   type Post {
     _id: ID!
     title: String
@@ -23,10 +32,5 @@ module.exports = gql`
     how_to_get_there: String
     author: User
     location: Locations
-  }
-  
-  extend type Query {
-    allPosts: [Post!]!
-    post(_id: ID!): Post!
   }
 `
