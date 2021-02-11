@@ -18,10 +18,7 @@ module.exports = {
     },
     locationsSortByType: async (_, { type }) => {
       try {
-        const locations = await Locations.find()
-        return await locations.filter(location => {
-            return location.isType === type
-        })
+        return await Locations.find({ isType: type })
       } catch (err) {
         throw err
       }
