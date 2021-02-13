@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server')
+const { gql } = require('apollo-server-express')
 
 module.exports = gql`
   extend type Query {
@@ -30,6 +30,7 @@ module.exports = gql`
     locationId: String
     isPrice: String
     how_to_get_there: String
+    comments: Int
     author: User
     location: Locations
   }

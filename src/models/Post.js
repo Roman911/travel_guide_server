@@ -24,6 +24,7 @@ const PostSchema = new mongoose.Schema({
   how_to_get_there: String,
   confirmed: Boolean,
   confirm_hash: String,
+  comments: Number,
   author: {
     ref: 'User',
     type: mongoose.Schema.Types.ObjectId

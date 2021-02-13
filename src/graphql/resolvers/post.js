@@ -2,9 +2,9 @@ const { Post } = require('../../models')
 
 module.exports = {
   Query: {
-    allPosts: async () => {
+    allPosts: async (_, {}) => {
       try {
-        return await Post.find().populate('author')
+        return await Post.find().populate('author').sort({ createdAt: -1} )
       } catch (err) {
         throw err
       }
