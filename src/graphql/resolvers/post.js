@@ -20,6 +20,13 @@ module.exports = {
       } catch (err) {
         throw err
       }
+    },
+    popularsPost: async (_, {}) => {
+      try {
+        return await Post.find().sort({ views: -1} ).limit(5)
+      } catch (err) {
+        throw err
+      }
     }
   },
   Mutation: {
