@@ -16,12 +16,14 @@ module.exports = {
         let { views } = await post
         views++
 
-        return await Post.findByIdAndUpdate(_id, { views }, { new: true })
+        await Post.findByIdAndUpdate(_id, { views }, { new: true })
+
+        return await post
       } catch (err) {
         throw err
       }
     },
-    popularsPost: async (_, {}) => {
+    popularsPosts: async (_, {}) => {
       try {
         return await Post.find().sort({ views: -1} ).limit(5)
       } catch (err) {

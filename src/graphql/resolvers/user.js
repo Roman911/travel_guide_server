@@ -30,7 +30,7 @@ module.exports = {
       let token = await issueAuthToken(user)
 
       return {
-        user,
+        ...user,
         token
       }
     }
@@ -50,7 +50,8 @@ module.exports = {
 
         user = new User({
           ...newUser,
-          avatar: 'undefined'
+          avatar: 'undefined',
+          rating: 1
         })
         user.password = await hash(user.password, 10)
 
@@ -59,8 +60,8 @@ module.exports = {
         let token = await issueAuthToken(result)
 
         return {
-          token,
-          user: result
+          ...result,
+          token
         }
 
       } catch (err) {

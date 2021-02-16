@@ -21,8 +21,10 @@ module.exports = {
     addLocationsUserList: async (_, { addLocation }) => {
       try {
         const { _id, userId, locationId, action } = await addLocation
-        if (_id) {
-          return await LocationsList.findByIdAndUpdate(_id, { action })
+        const location = await LocationsList.findOne({ userId, locationId })
+
+        if (location) {
+          return await LocationsList.findOneAndUpdate({ userId, locationId }, { action })
         } else {
           const location = new LocationsList({
             userId,

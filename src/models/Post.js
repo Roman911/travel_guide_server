@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const Paginate = require('mongoose-paginate-v2')
 
 const PostSchema = new mongoose.Schema({
-  idAuthor: String,
   type_material: String,
   title: String,
   cover: String,

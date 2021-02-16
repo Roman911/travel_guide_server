@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
   password: String,
   confirmed: Boolean,
   confirm_hash: String,
+  rating: Number,
   last_seen: {
     type: Date,
     default: new Date
