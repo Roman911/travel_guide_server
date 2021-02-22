@@ -13,14 +13,13 @@ module.exports = gql`
   type Comments {
     _id: ID!
     postId: ID!
-    idAuthor: ID!
-    text: String!
-    comments: [Comment]
+    content: String!
+    answers: [Answer]
     createdAt: String
     author: User
   }
 
-  type Comment {
+  type Answer {
     author: User
     content: String
     createdAt: String
@@ -28,13 +27,13 @@ module.exports = gql`
   
   input CommentInput {
     postId: ID!
-    author: ID!
+    token: String!
     content: String!
   }
   
   input AnswerInput {
     _id: ID!
-    author: ID!
+    token: String!
     content: String!
   }
 `

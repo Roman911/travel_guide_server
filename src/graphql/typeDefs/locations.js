@@ -22,7 +22,7 @@ module.exports = gql`
     coordinates: [String]
     isType: String
     createdAt: String
-    location: [String]
+    address: [String]
   }
 
   input LocationsInput {
@@ -34,6 +34,6 @@ module.exports = gql`
     small_text: String
     coordinates: [String]
     isType: String
-    location: [String]
+    address: [String]
   }
 `

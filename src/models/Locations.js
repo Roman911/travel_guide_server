@@ -9,7 +9,7 @@ const LocationsSchema = new mongoose.Schema({
   small_text: String,
   coordinates: Array,
   isType: String,
-  location: Array,
+  address: Array,
   confirmed: Boolean,
   confirm_hash: String,
   last_seen: {

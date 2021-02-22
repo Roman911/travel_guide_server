@@ -25,18 +25,18 @@ module.exports = {
     }
   },
   Mutation: {
-    createLocations: async (_, args) => {
-      const { locationsInput } = args
+    createLocations: async (_, { locationsInput }) => {
+      const { idAuthor, linkToPost, cover, title, tags, small_text, coordinates, isType, address } = locationsInput
       const locations = new Locations({
-        idAuthor: locationsInput.idAuthor,
-        linkToPost: locationsInput.linkToPost,
-        cover: locationsInput.cover,
-        title: locationsInput.title,
-        tags: locationsInput.tags,
-        small_text: locationsInput.small_text,
-        coordinates: locationsInput.coordinates,
-        isType: locationsInput.isType,
-        location: locationsInput.location
+        idAuthor,
+        linkToPost,
+        cover,
+        title,
+        tags,
+        small_text,
+        coordinates,
+        isType,
+        address
       })
       return await locations.save()
     }

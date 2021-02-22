@@ -2,9 +2,14 @@ const mongoose = require('mongoose')
 
 const CommentsSchema = new mongoose.Schema({
   postId: String,
-  text: String,
-  comments: [{
-    text: String,
+  confirmed: Boolean,
+  confirm_hash: String,
+  content: String,
+  author: {
+    ref: 'User',
+    type: mongoose.Schema.Types.ObjectId
+  },
+  answers: [{
     content: String,
     author: {
       ref: 'User',
@@ -15,13 +20,6 @@ const CommentsSchema = new mongoose.Schema({
       default: new Date
     }
   }],
-  confirmed: Boolean,
-  confirm_hash: String,
-  content: String,
-  author: {
-    ref: 'User',
-    type: mongoose.Schema.Types.ObjectId
-  },
   last_seen: {
     type: Date,
     default: new Date

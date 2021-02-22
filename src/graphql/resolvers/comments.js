@@ -1,11 +1,13 @@
 const { Comments, Post } = require('../../models')
 const  { NewCommentRules } = require('../../validations')
+const { JWT_SECRET } = require('../../config')
+const { verify } = require('jsonwebtoken')
 
 module.exports = {
   Query: {
     comments: async (_, { postId }) => {
       try {
-        return await Comments.find({ postId } ).populate('author').populate('comments.author').sort({ createdAt: -1} ).exec()
+        return await Comments.find({ postId } ).populate('author').populate('answers.author').sort({ createdAt: -1} ).exec()
       } catch (err) {
         throw err
       }
@@ -14,10 +16,15 @@ module.exports = {
   Mutation: {
     createComment: async (_, { newComment }) => {
       try {
-        const { content, postId } = await newComment
+        const { content, token, postId } = await newComment
+
+        const decodedToken = await verify(token, JWT_SECRET)
+
+        const { _id } = decodedToken
+
         await NewCommentRules.validate({ content }, { abortEarly: false })
 
-        const comment = new Comments({ ...newComment, comments: [] })
+        const comment = new Comments({ content, postId, author: _id, comments: [] })
         const post = await Post.findById( postId )
 
         let { comments } = await post
@@ -32,11 +39,16 @@ module.exports = {
     },
     addedAnswer: async (_, { newAnswer }) => {
       try {
-        const { _id, author, content } = await newAnswer
+        const { _id, token, content } = await newAnswer
+
+        const decodedToken = await verify(token, JWT_SECRET)
+
+        const { _id: author } = decodedToken
+
         await NewCommentRules.validate({ content }, { abortEarly: false })
 
         const update = {
-          comments: {
+          answers: {
             author,
             content
           }
