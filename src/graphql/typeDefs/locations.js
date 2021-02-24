@@ -26,7 +26,7 @@ module.exports = gql`
   }
 
   input LocationsInput {
-    idAuthor: String
+    token: String
     cover: String
     linkToPost: String
     title: String

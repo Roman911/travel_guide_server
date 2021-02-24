@@ -1,4 +1,5 @@
 const { Locations } = require('../../models')
+const { JWT_SECRET } = require('../../config')
 
 module.exports = {
   Query: {
@@ -26,9 +27,14 @@ module.exports = {
   },
   Mutation: {
     createLocations: async (_, { locationsInput }) => {
-      const { idAuthor, linkToPost, cover, title, tags, small_text, coordinates, isType, address } = locationsInput
+      const { token, linkToPost, cover, title, tags, small_text, coordinates, isType, address } = locationsInput
+
+      const decodedToken = await verify(token, JWT_SECRET)
+
+      const { _id } = decodedToken
+
       const locations = new Locations({
-        idAuthor,
+        author: _id,
         linkToPost,
         cover,
         title,

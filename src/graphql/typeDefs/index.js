@@ -3,6 +3,7 @@ const locations = require('./locations')
 const locationsList = require('./LocationsList')
 const post = require('./post')
 const user = require('./user')
+const uploadFiles = require('./uploadFiles')
 const baseDefs = require('./baseDefs')
 
 module.exports = [
@@ -11,5 +12,6 @@ module.exports = [
   locationsList,
   post,
   user,
+  uploadFiles,
   baseDefs
 ]
