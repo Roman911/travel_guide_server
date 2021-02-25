@@ -3,7 +3,8 @@ const fs = require('fs')
 
 module.exports = {
   Mutation: {
-    uploadFiles: async (parent, { file }) => {
+    uploadFile: async (parent, { file }) => {
+
       const { createReadStream, filename } = await file
 
       const stream = createReadStream()

@@ -3,7 +3,7 @@ const { gql } = require('apollo-server-express')
 module.exports = gql`
 
   extend type Mutation {
-    uploadFiles(file: Upload!): File!
+    uploadFile(file: Upload!): File!
   }
   
   type File {
