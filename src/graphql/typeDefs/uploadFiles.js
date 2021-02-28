@@ -7,6 +7,7 @@ module.exports = gql`
   }
   
   type File {
+    _id: String!
     url: String!
   }
 `

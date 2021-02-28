@@ -1,3 +1,4 @@
+const { verify } = require('jsonwebtoken')
 const { Locations } = require('../../models')
 const { JWT_SECRET } = require('../../config')
 
@@ -12,7 +13,7 @@ module.exports = {
     },
     location: async (_, { _id }) => {
       try {
-        return await Locations.findById(_id)
+        return await Locations.findById(_id).populate('cover')
       } catch (err) {
         throw err
       }
@@ -27,24 +28,23 @@ module.exports = {
   },
   Mutation: {
     createLocations: async (_, { locationsInput }) => {
-      const { token, linkToPost, cover, title, tags, small_text, coordinates, isType, address } = locationsInput
-
-      const decodedToken = await verify(token, JWT_SECRET)
-
-      const { _id } = decodedToken
-
-      const locations = new Locations({
-        author: _id,
-        linkToPost,
-        cover,
-        title,
-        tags,
-        small_text,
-        coordinates,
-        isType,
-        address
-      })
-      return await locations.save()
+      try {
+        const { token, cover, title, small_text, coordinates, isType, address } = locationsInput
+        const decodedToken = await verify(token, JWT_SECRET)
+        const { _id } = decodedToken
+        const locations = new Locations({
+          author: _id,
+          cover,
+          title,
+          small_text,
+          coordinates,
+          isType,
+          address
+        })
+        return await locations.save()
+      } catch (err) {
+        throw err
+      }
     }
   }
 }

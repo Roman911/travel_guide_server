@@ -22,6 +22,8 @@ module.exports = {
 
         const { _id } = decodedToken
 
+
+
         await NewCommentRules.validate({ content }, { abortEarly: false })
 
         const comment = new Comments({ content, postId, author: _id, comments: [] })

@@ -1,17 +1,21 @@
 const mongoose = require('mongoose')
 
 const LocationsSchema = new mongoose.Schema({
-  idAuthor: String,
-  linkToPost: String,
-  cover: String,
   title: String,
-  tags: Array,
   small_text: String,
   coordinates: Array,
   isType: String,
   address: Array,
   confirmed: Boolean,
   confirm_hash: String,
+  author: {
+    ref: 'User',
+    type: mongoose.Schema.Types.ObjectId
+  },
+  cover: {
+    ref: 'Upload',
+    type: mongoose.Schema.Types.ObjectId
+  },
   last_seen: {
     type: Date,
     default: new Date

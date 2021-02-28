@@ -13,11 +13,9 @@ module.exports = gql`
   
   type Locations {
     _id: ID!
-    idAuthor: String
-    cover: String
-    linkToPost: String
+    author: User
+    cover: File
     title: String
-    tags: [String]
     small_text: String
     coordinates: [String]
     isType: String
@@ -28,9 +26,7 @@ module.exports = gql`
   input LocationsInput {
     token: String
     cover: String
-    linkToPost: String
     title: String
-    tags: [String]
     small_text: String
     coordinates: [String]
     isType: String
