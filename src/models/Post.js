@@ -2,25 +2,17 @@ const mongoose = require('mongoose')
 const Paginate = require('mongoose-paginate-v2')
 
 const PostSchema = new mongoose.Schema({
+  editor: String,
   type_material: String,
-  title: String,
-  cover: String,
+  tickets: Array,
   link: String,
   tags: Array,
-  tickets: Array,
-  small_text: String,
-  coordinates: Array,
   work_time: String,
   isType: String,
-  photo: String,
-  post: String,
-  editor: String,
+  how_to_get_there: String,
   views: Number,
   likes: Array,
-  text: String,
-  locationId: String,
   isPrice: String,
-  how_to_get_there: String,
   confirmed: Boolean,
   confirm_hash: String,
   comments: Number,
@@ -30,6 +22,10 @@ const PostSchema = new mongoose.Schema({
   },
   location: {
     ref: 'Locations',
+    type: mongoose.Schema.Types.ObjectId
+  },
+  cover: {
+    ref: 'Upload',
     type: mongoose.Schema.Types.ObjectId
   },
   last_seen: {

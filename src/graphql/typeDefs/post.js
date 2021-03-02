@@ -9,30 +9,39 @@ module.exports = gql`
   
   extend type Mutation {
     changeLike(postId: ID!, userId: ID!): Post!
+    createPost(postInput: PostInput): Post!
   }
   
   type Post {
     _id: ID!
-    title: String
     type_material: String
-    cover: String
     link: String
     tags: [String]
     tickets: [String]
-    small_text: String
-    coordinates: [String]
     work_time: String
     isType: String
     editor: String
     views: Int
     likes: [String]
     createdAt: String
-    text: String
-    locationId: String
     isPrice: String
     how_to_get_there: String
     comments: Int
     author: User
     location: Locations
+    cover: File
+  }
+  
+  input PostInput {
+    token: String
+    type_material: String
+    location: String
+    tags: [String]
+    editor: String
+    tickets: [String]
+    link: String
+    work_time: String
+    isPrice: String
+    how_to_get_there: String
   }
 `

@@ -21,6 +21,7 @@ module.exports = gql`
     isType: String
     createdAt: String
     address: [String]
+    post: Post
   }
 
   input LocationsInput {

@@ -5,6 +5,7 @@ module.exports = gql`
     authUser: User!
     author(_id: ID!): User
     loginUser(email: String!, password: String!): User!
+    user(_id: ID!): User
   }
 
   extend type Mutation {

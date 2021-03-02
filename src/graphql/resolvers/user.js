@@ -33,6 +33,13 @@ module.exports = {
         ...user,
         token
       }
+    },
+    user: async (_, { _id }) => {
+      try {
+        return await User.findById(_id)
+      } catch (err) {
+        throw err
+      }
     }
   },
   Mutation: {

@@ -13,7 +13,7 @@ module.exports = {
     },
     location: async (_, { _id }) => {
       try {
-        return await Locations.findById(_id).populate('cover')
+        return await Locations.findById(_id).populate('cover').populate('post')
       } catch (err) {
         throw err
       }
@@ -39,7 +39,8 @@ module.exports = {
           small_text,
           coordinates,
           isType,
-          address
+          address,
+          postLink: ''
         })
         return await locations.save()
       } catch (err) {

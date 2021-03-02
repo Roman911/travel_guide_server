@@ -1,17 +1,19 @@
-const { Post } = require('../../models')
+const { verify } = require('jsonwebtoken')
+const { Post, Locations } = require('../../models')
+const { JWT_SECRET } = require('../../config')
 
 module.exports = {
   Query: {
     allPosts: async (_, {}) => {
       try {
-        return await Post.find().populate('author').sort({ createdAt: -1} )
+        return await Post.find().populate('author').populate('cover').sort({ createdAt: -1} )
       } catch (err) {
         throw err
       }
     },
     post: async (_, { _id }) => {
       try {
-        let post = await Post.findById(_id).populate('author').populate('location')
+        let post = await Post.findById(_id).populate('author').populate('location').populate('cover')
 
         let { views } = await post
         views++
@@ -25,7 +27,7 @@ module.exports = {
     },
     popularsPosts: async (_, {}) => {
       try {
-        return await Post.find().sort({ views: -1} ).limit(5)
+        return await Post.find().populate('cover').sort({ views: -1} ).limit(5)
       } catch (err) {
         throw err
       }
@@ -49,11 +51,32 @@ module.exports = {
       } catch (err) {
         throw err
       }
-    }
+    },
+    createPost: async (_, { postInput }) => {
+      const { token, type_material, location, tags, editor, tickets, link, work_time, isPrice, how_to_get_there } = postInput
+      const decodedToken = await verify(token, JWT_SECRET)
+      const { _id } = decodedToken
 
-    // createPost: () => {
-    //
-    // },
+      const post = new Post({
+        author: _id,
+        type_material,
+        location,
+        tags,
+        editor,
+        tickets,
+        link,
+        work_time,
+        isPrice,
+        how_to_get_there,
+        comments: 0
+      })
+
+      const { _id: postId } = await post
+
+      await Locations.findByIdAndUpdate(location, { post: postId } )
+
+      return await post.save()
+    },
     // updatePost: () => {
     //
     // },
