@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
-  idAuthor: String,
   email: String,
   avatar: String,
   name: String,
@@ -10,6 +9,7 @@ const UserSchema = new mongoose.Schema({
   confirmed: Boolean,
   confirm_hash: String,
   rating: Number,
+  socials: Array,
   last_seen: {
     type: Date,
     default: new Date

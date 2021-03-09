@@ -74,6 +74,13 @@ module.exports = {
       } catch (err) {
         throw err
       }
+    },
+    addAvatar: async (_, { _id, avatar }) => {
+      try {
+        return await User.findByIdAndUpdate(_id, { avatar })
+      } catch (err) {
+        throw err
+      }
     }
   }
 }
