@@ -1,7 +1,7 @@
+const { verify } = require('jsonwebtoken')
 const { Comments, Post } = require('../../models')
 const  { NewCommentRules } = require('../../validations')
 const { JWT_SECRET } = require('../../config')
-const { verify } = require('jsonwebtoken')
 
 module.exports = {
   Query: {

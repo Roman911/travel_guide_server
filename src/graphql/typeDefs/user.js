@@ -11,6 +11,7 @@ module.exports = gql`
   extend type Mutation {
     registerUser(newUser: UserInput!): User!
     addAvatar(_id: ID!, avatar: String!): User!
+    updateUser(updateUser: UpdateUserInput!): User!
   }
 
   type User {
@@ -20,12 +21,29 @@ module.exports = gql`
     email: String
     rating: Int
     token: String
-    socials: [Socials]
+    aboutMy: String
+    socials: Socials
+  }
+
+  input UpdateUserInput {
+    name: String
+    token: String
+    aboutMy: String
+    socials: SocialsInput
+  }
+  
+  input SocialsInput {
+    facebook: String
+    instagram: String
+    twitter: String
+    youtube: String
   }
   
   type Socials {
-    social: String
-    link: String
+    facebook: String
+    instagram: String
+    twitter: String
+    youtube: String
   }
 
   input UserInput {

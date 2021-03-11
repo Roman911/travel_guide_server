@@ -1,7 +1,9 @@
+const { verify } = require('jsonwebtoken')
 const { compare, hash } = require('bcryptjs')
 const { User } = require('../../models')
 const { UserAuthenticationRules, UserRegisterationRules } = require('../../validations')
 const { serializeUser, issueAuthToken } = require('../../helpers')
+const { JWT_SECRET } = require('../../config')
 
 module.exports = {
   Query: {
@@ -58,7 +60,8 @@ module.exports = {
         user = new User({
           ...newUser,
           avatar: 'undefined',
-          rating: 1
+          rating: 1,
+          aboutMy: ''
         })
         user.password = await hash(user.password, 10)
 
@@ -78,6 +81,23 @@ module.exports = {
     addAvatar: async (_, { _id, avatar }) => {
       try {
         return await User.findByIdAndUpdate(_id, { avatar })
+      } catch (err) {
+        throw err
+      }
+    },
+    updateUser: async (_, { updateUser }) => {
+      try {
+        const { token, name, aboutMy, socials } = await updateUser
+        const decodedToken = await verify(token, JWT_SECRET)
+        const { _id } = decodedToken
+
+        const update = {
+          name,
+          aboutMy,
+          socials
+        }
+
+        return await User.findByIdAndUpdate(_id, update )
       } catch (err) {
         throw err
       }
