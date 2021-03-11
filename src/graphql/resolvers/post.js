@@ -6,14 +6,14 @@ module.exports = {
   Query: {
     allPosts: async (_, {}) => {
       try {
-        return await Post.find().populate('author').populate('cover').sort({ createdAt: -1} )
+        return await Post.find().populate('author').sort({ createdAt: -1} )
       } catch (err) {
         throw err
       }
     },
     post: async (_, { _id }) => {
       try {
-        let post = await Post.findById(_id).populate('author').populate('location').populate('cover')
+        let post = await Post.findById(_id).populate('author').populate('location')
 
         let { views } = await post
         views++
@@ -27,7 +27,7 @@ module.exports = {
     },
     popularsPosts: async (_, {}) => {
       try {
-        return await Post.find().populate('cover').sort({ views: -1} ).limit(5)
+        return await Post.find().sort({ views: -1} ).limit(5)
       } catch (err) {
         throw err
       }
@@ -53,12 +53,13 @@ module.exports = {
       }
     },
     createPost: async (_, { postInput }) => {
-      const { token, type_material, title, location, tags, editor, tickets, link, work_time, isPrice, how_to_get_there, small_text } = postInput
+      const { token, cover, type_material, title, location, tags, editor, tickets, link, work_time, isPrice, how_to_get_there, small_text } = postInput
       const decodedToken = await verify(token, JWT_SECRET)
       const { _id } = decodedToken
 
       const post = new Post({
         author: _id,
+        cover,
         type_material,
         title,
         location,
@@ -70,7 +71,8 @@ module.exports = {
         isPrice,
         how_to_get_there,
         small_text,
-        comments: 0
+        comments: 0,
+        views: 0
       })
 
       const { _id: postId } = await post

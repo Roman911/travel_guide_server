@@ -15,6 +15,7 @@ module.exports = gql`
   type Post {
     _id: ID!
     type_material: String
+    title: String
     link: String
     tags: [String]
     tickets: [String]
@@ -29,11 +30,13 @@ module.exports = gql`
     comments: Int
     author: User
     location: Locations
-    cover: File
+    cover: String
+    small_text: String
   }
   
   input PostInput {
     token: String
+    cover: String
     type_material: String
     title: String
     location: String

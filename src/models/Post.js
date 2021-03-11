@@ -4,6 +4,7 @@ const Paginate = require('mongoose-paginate-v2')
 const PostSchema = new mongoose.Schema({
   editor: String,
   type_material: String,
+  cover: String,
   title: String,
   tickets: Array,
   link: String,
@@ -24,10 +25,6 @@ const PostSchema = new mongoose.Schema({
   },
   location: {
     ref: 'Locations',
-    type: mongoose.Schema.Types.ObjectId
-  },
-  cover: {
-    ref: 'Upload',
     type: mongoose.Schema.Types.ObjectId
   },
   last_seen: {
