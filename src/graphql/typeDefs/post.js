@@ -35,6 +35,7 @@ module.exports = gql`
   input PostInput {
     token: String
     type_material: String
+    title: String
     location: String
     tags: [String]
     editor: String
@@ -43,5 +44,6 @@ module.exports = gql`
     work_time: String
     isPrice: String
     how_to_get_there: String
+    small_text: String
   }
 `

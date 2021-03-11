@@ -4,6 +4,7 @@ const Paginate = require('mongoose-paginate-v2')
 const PostSchema = new mongoose.Schema({
   editor: String,
   type_material: String,
+  title: String,
   tickets: Array,
   link: String,
   tags: Array,
@@ -16,6 +17,7 @@ const PostSchema = new mongoose.Schema({
   confirmed: Boolean,
   confirm_hash: String,
   comments: Number,
+  small_text: String,
   author: {
     ref: 'User',
     type: mongoose.Schema.Types.ObjectId

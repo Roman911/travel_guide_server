@@ -53,13 +53,14 @@ module.exports = {
       }
     },
     createPost: async (_, { postInput }) => {
-      const { token, type_material, location, tags, editor, tickets, link, work_time, isPrice, how_to_get_there } = postInput
+      const { token, type_material, title, location, tags, editor, tickets, link, work_time, isPrice, how_to_get_there, small_text } = postInput
       const decodedToken = await verify(token, JWT_SECRET)
       const { _id } = decodedToken
 
       const post = new Post({
         author: _id,
         type_material,
+        title,
         location,
         tags,
         editor,
@@ -68,6 +69,7 @@ module.exports = {
         work_time,
         isPrice,
         how_to_get_there,
+        small_text,
         comments: 0
       })
 
