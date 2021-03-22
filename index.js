@@ -1,7 +1,9 @@
 const { ApolloServer } = require('apollo-server-express')
 const express = require('express')
+const compression = require('compression')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const bodyParser = require('body-parser')
 
 const { MONGO_DB_KEY, PORT } = require('./src/config')
 const typeDefs = require('./src/graphql/typeDefs')
@@ -15,11 +17,14 @@ const server = new ApolloServer({
 })
 
 const app = express()
+app.use('/graphql', bodyParser.json({ limit: '20mb' }))
+
 server.applyMiddleware({ app }, AuthMiddleware)
 
 app.use(cors())
 app.use(express.static('public'))
 app.use(express.static('uploads'))
+app.use(compression())
 
 async function star() {
   try {

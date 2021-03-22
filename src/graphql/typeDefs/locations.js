@@ -4,7 +4,7 @@ module.exports = gql`
   extend type Query {
     allLocations: [Locations]
     location(_id: ID!): Locations
-    locationsSortByType(type: String): [Locations]
+    locationsSortByType(type: [String]): [Locations]
   }
 
   extend type Mutation {
