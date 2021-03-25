@@ -61,7 +61,8 @@ module.exports = {
           ...newUser,
           avatar: 'undefined',
           rating: 1,
-          aboutMy: ''
+          aboutMy: '',
+          selectedLocations: []
         })
         user.password = await hash(user.password, 10)
 
@@ -87,14 +88,15 @@ module.exports = {
     },
     updateUser: async (_, { updateUser }) => {
       try {
-        const { token, name, aboutMy, socials } = await updateUser
+        const { token, name, aboutMy, socials, selectedLocations } = await updateUser
         const decodedToken = await verify(token, JWT_SECRET)
         const { _id } = decodedToken
 
         const update = {
           name,
           aboutMy,
-          socials
+          socials,
+          selectedLocations
         }
 
         return await User.findByIdAndUpdate(_id, update )

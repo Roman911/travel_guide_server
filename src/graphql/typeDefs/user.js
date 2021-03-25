@@ -23,6 +23,7 @@ module.exports = gql`
     token: String
     aboutMy: String
     socials: Socials
+    selectedLocations: [SelectedLocations]
   }
 
   input UpdateUserInput {
@@ -30,6 +31,7 @@ module.exports = gql`
     token: String
     aboutMy: String
     socials: SocialsInput
+    selectedLocations: [SelectedLocationsInput]
   }
   
   input SocialsInput {
@@ -39,11 +41,21 @@ module.exports = gql`
     youtube: String
   }
   
+  input SelectedLocationsInput {
+    type: String
+    select: Boolean
+  }
+  
   type Socials {
     facebook: String
     instagram: String
     twitter: String
     youtube: String
+  }
+  
+  type SelectedLocations {
+    type: String
+    select: Boolean
   }
 
   input UserInput {

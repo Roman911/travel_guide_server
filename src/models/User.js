@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
   confirm_hash: String,
   rating: Number,
   aboutMy: String,
+  selectedLocations: Array,
   socials: {
     facebook: String,
     instagram: String,
