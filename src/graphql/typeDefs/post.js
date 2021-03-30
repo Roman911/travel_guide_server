@@ -25,7 +25,7 @@ module.exports = gql`
     views: Int
     likes: [String]
     createdAt: String
-    isPrice: String
+    isPrice: Boolean
     how_to_get_there: String
     comments: Int
     author: User
@@ -45,7 +45,7 @@ module.exports = gql`
     tickets: [String]
     link: String
     work_time: String
-    isPrice: String
+    isPrice: Boolean
     how_to_get_there: String
     small_text: String
   }

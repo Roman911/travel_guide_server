@@ -14,7 +14,7 @@ const PostSchema = new mongoose.Schema({
   how_to_get_there: String,
   views: Number,
   likes: Array,
-  isPrice: String,
+  isPrice: Boolean,
   confirmed: Boolean,
   confirm_hash: String,
   comments: Number,
