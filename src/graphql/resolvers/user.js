@@ -18,6 +18,7 @@ module.exports = {
       await UserAuthenticationRules.validate({ email, password }, { abortEarly: false })
 
       let user = await User.findOne({ email: email })
+
       if (!user) {
         throw new Error('Неправильний логін або пароль!')
       }

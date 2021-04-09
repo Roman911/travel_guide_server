@@ -14,7 +14,8 @@ const serializeUser = user => pick(user, [
   '_id',
   'email',
   'name',
-  'avatar'
+  'avatar',
+  'rating'
 ])
 
 module.exports = {
