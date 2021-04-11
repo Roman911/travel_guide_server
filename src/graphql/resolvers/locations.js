@@ -24,6 +24,13 @@ module.exports = {
       } catch (err) {
         throw err
       }
+    },
+    locationsSortById: async (_, { _id }) => {
+      try {
+        return await Locations.find({ _id })
+      } catch (err) {
+        throw err
+      }
     }
   },
   Mutation: {
