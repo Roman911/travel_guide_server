@@ -17,9 +17,7 @@ module.exports = {
     createComment: async (_, { newComment }) => {
       try {
         const { content, token, postId } = await newComment
-
         const decodedToken = await verify(token, JWT_SECRET)
-
         const { _id } = decodedToken
 
         await NewCommentRules.validate({ content }, { abortEarly: false })
