@@ -6,10 +6,16 @@ module.exports = gql`
     createDirection(directionInput: DirectionInput): Direction!
   }
   
+  type Location {
+    lat: Float
+    lng: Float
+  }
+  
   type Waypoints {
     infoLocation: Boolean
-    location: Locations
+    location: Location
     address: String
+    locationId: String
   }
   
   type Direction {
@@ -28,10 +34,17 @@ module.exports = gql`
     author: User
   }
   
+  input LocationInput {
+    lat: Float
+    lng: Float
+  }
+  
   input WaypointsInput {
     infoLocation: Boolean
-    location: String
+    location: LocationInput
     address: String
+    typeMarker: String
+    locationId: String
   }
   
   input DirectionInput {
