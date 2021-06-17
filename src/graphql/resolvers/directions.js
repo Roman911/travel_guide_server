@@ -34,7 +34,7 @@ module.exports = {
     }
   },
   Mutation: {
-    changeLike: async (_, { directionId, userId }) => {
+    likeDirection: async (_, { directionId, userId }) => {
       try {
         const direction = await Directions.findById(directionId)
         const { likes } = await direction
