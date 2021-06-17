@@ -1,6 +1,11 @@
 const { gql } = require('apollo-server-express')
 
 module.exports = gql`
+  extend type Query {
+    allDirections: [Direction!]!
+    direction(_id: ID!): Direction!
+    popularsDirections: [Direction!]!
+  }
   
   extend type Mutation {
     createDirection(directionInput: DirectionInput): Direction!
