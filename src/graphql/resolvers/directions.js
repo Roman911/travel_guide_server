@@ -34,9 +34,9 @@ module.exports = {
     }
   },
   Mutation: {
-    likeDirection: async (_, { directionId, userId }) => {
+    likeDirection: async (_, { id, userId }) => {
       try {
-        const direction = await Directions.findById(directionId)
+        const direction = await Directions.findById(id)
         const { likes } = await direction
 
         let update = { $push: { likes: userId } }
@@ -47,7 +47,7 @@ module.exports = {
           }
         }
 
-        return  await Directions.findByIdAndUpdate(directionId, update, { new: true })
+        return  await Directions.findByIdAndUpdate(id, update, { new: true })
       } catch (err) {
         throw err
       }

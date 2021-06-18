@@ -8,7 +8,7 @@ module.exports = gql`
   }
   
   extend type Mutation {
-    likeDirection(directionId: ID!, userId: ID!): Direction!
+    likeDirection(id: ID!, userId: ID!): Direction!
     createDirection(directionInput: DirectionInput): Direction!
   }
   

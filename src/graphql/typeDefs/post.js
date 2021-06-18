@@ -8,7 +8,7 @@ module.exports = gql`
   }
   
   extend type Mutation {
-    changeLike(postId: ID!, userId: ID!): Post!
+    likePost(id: ID!, userId: ID!): Post!
     createPost(postInput: PostInput): Post!
   }
   

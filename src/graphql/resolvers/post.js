@@ -34,9 +34,9 @@ module.exports = {
     }
   },
   Mutation: {
-    changeLike: async (_, { postId, userId }) => {
+    likePost: async (_, { id, userId }) => {
       try {
-        const post = await Post.findById(postId)
+        const post = await Post.findById(id)
         const { likes } = await post
 
         let update = { $push: { likes: userId } }
@@ -47,7 +47,7 @@ module.exports = {
           }
         }
 
-        return  await Post.findByIdAndUpdate(postId, update, { new: true })
+        return  await Post.findByIdAndUpdate(id, update, { new: true })
       } catch (err) {
         throw err
       }
