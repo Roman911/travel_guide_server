@@ -22,6 +22,7 @@ module.exports = gql`
     location: Location
     address: String
     locationId: String
+    cover: String
   }
   
   type Direction {
@@ -51,6 +52,7 @@ module.exports = gql`
     address: String
     typeMarker: String
     locationId: String
+    cover: String
   }
   
   input DirectionInput {
