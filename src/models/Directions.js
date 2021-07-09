@@ -11,6 +11,7 @@ const DirectionsSchema = new mongoose.Schema({
   editor: String,
   views: Number,
   likes: Array,
+  tags: Array,
   confirmed: Boolean,
   confirm_hash: String,
   comments: Number,

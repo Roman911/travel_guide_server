@@ -33,6 +33,7 @@ module.exports = gql`
     travelMode: [String]
     waypoints: [Waypoints]
     endStart: Boolean
+    tags: [String]
     editor: String
     views: Int
     likes: [String]
@@ -61,6 +62,7 @@ module.exports = gql`
     type_rout: String
     small_text: String
     travelMode: [String]
+    tags: [String]
     waypoints: [WaypointsInput]
     endStart: Boolean
     editor: String
