@@ -5,6 +5,7 @@ module.exports = gql`
     allPosts: [Post!]!
     post(_id: ID!): Post!
     popularsPosts: [Post!]!
+    postsSortByTag(tag: String!): [Post!]!
   }
   
   extend type Mutation {

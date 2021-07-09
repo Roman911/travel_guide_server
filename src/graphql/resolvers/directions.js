@@ -31,6 +31,13 @@ module.exports = {
       } catch (err) {
         throw err
       }
+    },
+    directionsSortByTag: async (_, { tag }) => {
+      try {
+        return await Directions.find({ tags: tag })
+      } catch (err) {
+        throw err
+      }
     }
   },
   Mutation: {

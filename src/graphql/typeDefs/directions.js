@@ -5,6 +5,7 @@ module.exports = gql`
     allDirections: [Direction!]!
     direction(_id: ID!): Direction!
     popularsDirections: [Direction!]!
+    directionsSortByTag(tag: String!): [Direction!]!
   }
   
   extend type Mutation {

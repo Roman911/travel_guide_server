@@ -25,9 +25,16 @@ module.exports = {
         throw err
       }
     },
-    popularsPosts: async (_, {}) => {
+    popularsPosts: async () => {
       try {
         return await Post.find().sort({ views: -1} ).limit(5)
+      } catch (err) {
+        throw err
+      }
+    },
+    postsSortByTag: async (_, { tag }) => {
+      try {
+        return await Post.find({ tags: tag })
       } catch (err) {
         throw err
       }
