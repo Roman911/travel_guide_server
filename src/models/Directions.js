@@ -15,6 +15,7 @@ const DirectionsSchema = new mongoose.Schema({
   confirmed: Boolean,
   confirm_hash: String,
   comments: Number,
+  legs: Array,
   author: {
     ref: 'User',
     type: mongoose.Schema.Types.ObjectId

@@ -34,7 +34,7 @@ module.exports = {
     },
     postsSortByTag: async (_, { tag }) => {
       try {
-        return await Post.find({ tags: tag })
+        return await Post.find({ tags: tag }).populate('author')
       } catch (err) {
         throw err
       }

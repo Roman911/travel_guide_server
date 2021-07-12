@@ -1,5 +1,27 @@
 const { gql } = require('apollo-server-express')
 
+const Waypoints = `
+  infoLocation: Boolean
+  address: String
+  locationId: String
+  cover: String
+`
+
+const Direction = `
+  title: String
+  type_rout: String
+  small_text: String
+  travelMode: [String]
+  tags: [String]
+  endStart: Boolean
+  editor: String
+`
+
+const Legs = `
+  distance: String
+  duration: String
+`
+
 module.exports = gql`
   extend type Query {
     allDirections: [Direction!]!
@@ -19,28 +41,24 @@ module.exports = gql`
   }
   
   type Waypoints {
-    infoLocation: Boolean
     location: Location
-    address: String
-    locationId: String
-    cover: String
+    ${Waypoints}
+  }
+  
+  type Legs {
+    ${Legs}
   }
   
   type Direction {
     _id: ID!
-    title: String
-    type_rout: String
-    small_text: String
-    travelMode: [String]
     waypoints: [Waypoints]
-    endStart: Boolean
-    tags: [String]
-    editor: String
     views: Int
     likes: [String]
     createdAt: String
     comments: Int
     author: User
+    legs: [Legs]
+    ${Direction}
   }
   
   input LocationInput {
@@ -49,23 +67,19 @@ module.exports = gql`
   }
   
   input WaypointsInput {
-    infoLocation: Boolean
     location: LocationInput
-    address: String
     typeMarker: String
-    locationId: String
-    cover: String
+    ${Waypoints}
+  }
+  
+  input LegsInput {
+    ${Legs}
   }
   
   input DirectionInput {
     token: String
-    title: String
-    type_rout: String
-    small_text: String
-    travelMode: [String]
-    tags: [String]
     waypoints: [WaypointsInput]
-    endStart: Boolean
-    editor: String
+    legs: [LegsInput]
+    ${Direction}
   }
 `
