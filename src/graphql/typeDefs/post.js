@@ -33,6 +33,7 @@ module.exports = gql`
     location: Locations
     cover: String
     small_text: String
+    last_seen: String
   }
   
   input PostInput {
