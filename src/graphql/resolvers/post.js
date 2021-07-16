@@ -6,7 +6,8 @@ module.exports = {
   Query: {
     allPosts: async (_, {}) => {
       try {
-        return await Post.find().populate('author').sort({ createdAt: -1} )
+        // return await Post.find().sort({ createdAt: -1} ).skip(2).limit(2).populate('author')
+        return await Post.find().sort({ createdAt: -1} ).populate('author')
       } catch (err) {
         throw err
       }
