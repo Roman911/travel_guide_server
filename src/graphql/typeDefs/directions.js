@@ -15,6 +15,7 @@ const Direction = `
   tags: [String]
   endStart: Boolean
   editor: String
+  last_seen: String
 `
 
 const Legs = `
