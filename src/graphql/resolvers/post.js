@@ -39,6 +39,14 @@ module.exports = {
       } catch (err) {
         throw err
       }
+    },
+    lengthPosts: async () => {
+      try {
+        const posts = await Post.find()
+        return await posts.length
+      } catch (err) {
+        throw err
+      }
     }
   },
   Mutation: {
