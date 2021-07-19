@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express')
 
 module.exports = gql`
   extend type Query {
-    allPosts: [Post!]!
+    allPosts(page: Int, limit: Int): [Post!]!
     post(_id: ID!): Post!
     popularsPosts: [Post!]!
     postsSortByTag(tag: String!): [Post!]!

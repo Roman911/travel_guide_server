@@ -4,10 +4,10 @@ const { JWT_SECRET } = require('../../config')
 
 module.exports = {
   Query: {
-    allPosts: async (_, {}) => {
+    allPosts: async (_, { page, limit }) => {
       try {
-        // return await Post.find().sort({ createdAt: -1} ).skip(2).limit(2).populate('author')
-        return await Post.find().sort({ createdAt: -1} ).populate('author')
+        const skip = await page === 1 ? 0 : page * limit
+        return await Post.find().sort({ createdAt: -1} ).skip(skip).limit(limit).populate('author')
       } catch (err) {
         throw err
       }
