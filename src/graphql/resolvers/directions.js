@@ -35,7 +35,7 @@ module.exports = {
     },
     directionsSortByTag: async (_, { tag }) => {
       try {
-        return await Directions.find({ tags: tag })
+        return await Directions.find({ tags: tag }).populate('author')
       } catch (err) {
         throw err
       }
