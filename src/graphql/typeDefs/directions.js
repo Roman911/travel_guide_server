@@ -25,10 +25,11 @@ const Legs = `
 
 module.exports = gql`
   extend type Query {
-    allDirections: [Direction!]!
+    allDirections(page: Int, limit: Int): [Direction!]!
     direction(_id: ID!): Direction!
     popularsDirections: [Direction!]!
     directionsSortByTag(tag: String!): [Direction!]!
+    lengthDirections: Int!
   }
   
   extend type Mutation {

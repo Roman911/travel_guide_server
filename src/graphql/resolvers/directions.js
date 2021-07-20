@@ -4,9 +4,10 @@ const { JWT_SECRET } = require('../../config')
 
 module.exports = {
   Query: {
-    allDirections: async (_, {}) => {
+    allDirections: async (_, { page, limit }) => {
       try {
-        return await Directions.find().populate('author').sort({ createdAt: -1} )
+        const skip = await page === 1 ? 0 : page * limit
+        return await Directions.find().sort({ createdAt: -1} ).skip(skip).limit(limit).populate('author')
       } catch (err) {
         throw err
       }
@@ -35,6 +36,14 @@ module.exports = {
     directionsSortByTag: async (_, { tag }) => {
       try {
         return await Directions.find({ tags: tag })
+      } catch (err) {
+        throw err
+      }
+    },
+    lengthDirections: async () => {
+      try {
+        const directions = await Directions.find()
+        return await directions.length
       } catch (err) {
         throw err
       }
