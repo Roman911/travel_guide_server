@@ -69,7 +69,7 @@ module.exports = {
       }
     },
     createDirection: async (_, { directionInput }) => {
-      const { token, title, type_rout, small_text, travelMode, waypoints, endStart, editor, tags, legs } = directionInput
+      const { token, title, type_rout, small_text, travelMode, waypoints, endStart, editor, tags, cover, legs } = directionInput
       const decodedToken = await verify(token, JWT_SECRET)
       const { _id } = decodedToken
 
@@ -84,6 +84,7 @@ module.exports = {
         endStart,
         editor,
         legs,
+        cover,
         comments: 0,
         views: 0
       })

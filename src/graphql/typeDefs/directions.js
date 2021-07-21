@@ -60,6 +60,7 @@ module.exports = gql`
     comments: Int
     author: User
     legs: [Legs]
+    cover: File
     ${Direction}
   }
   
@@ -82,6 +83,7 @@ module.exports = gql`
     token: String
     waypoints: [WaypointsInput]
     legs: [LegsInput]
+    cover: String
     ${Direction}
   }
 `

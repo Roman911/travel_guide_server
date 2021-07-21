@@ -16,6 +16,10 @@ const DirectionsSchema = new mongoose.Schema({
   confirm_hash: String,
   comments: Number,
   legs: Array,
+  cover: {
+    ref: 'Upload',
+    type: mongoose.Schema.Types.ObjectId
+  },
   author: {
     ref: 'User',
     type: mongoose.Schema.Types.ObjectId
