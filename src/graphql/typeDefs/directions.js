@@ -60,7 +60,7 @@ module.exports = gql`
     comments: Int
     author: User
     legs: [Legs]
-    cover: File
+    cover: String
     ${Direction}
   }
   
