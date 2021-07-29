@@ -18,9 +18,9 @@ const Direction = `
   last_seen: String
 `
 
-const Legs = `
-  distance: String
-  duration: String
+const Value = `
+  text: String
+  value: Int
 `
 
 module.exports = gql`
@@ -47,8 +47,13 @@ module.exports = gql`
     ${Waypoints}
   }
   
+  type Value {
+    ${Value}
+  }
+  
   type Legs {
-    ${Legs}
+    distance: Value
+    duration: Value
   }
   
   type Direction {
@@ -75,8 +80,13 @@ module.exports = gql`
     ${Waypoints}
   }
   
+  input ValueInput {
+    ${Value}
+  }
+  
   input LegsInput {
-    ${Legs}
+    distance: ValueInput
+    duration: ValueInput
   }
   
   input DirectionInput {
