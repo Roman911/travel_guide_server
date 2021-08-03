@@ -47,6 +47,13 @@ module.exports = {
       } catch (err) {
         throw err
       }
+    },
+    searchPosts: async (_, { value }) => {
+      try {
+        return await Post.find({ title: { $regex: value, $options: "i" } })
+      } catch (err) {
+        throw err
+      }
     }
   },
   Mutation: {

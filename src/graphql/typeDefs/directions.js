@@ -30,6 +30,7 @@ module.exports = gql`
     popularsDirections: [Direction!]!
     directionsSortByTag(tag: String!): [Direction!]!
     lengthDirections: Int!
+    searchDirections(value: String!): [Direction!]!
   }
   
   extend type Mutation {

@@ -47,6 +47,13 @@ module.exports = {
       } catch (err) {
         throw err
       }
+    },
+    searchDirections: async (_, { value }) => {
+      try {
+        return await Directions.find({ title: { $regex: value, $options: "i" } })
+      } catch (err) {
+        throw err
+      }
     }
   },
   Mutation: {
